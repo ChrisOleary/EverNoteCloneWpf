@@ -17,6 +17,7 @@ namespace EverNoteCloneWpf.ViewModel
             set 
             { 
                 user = value;
+
                 OnPropertyChanged("Register");
 
 
