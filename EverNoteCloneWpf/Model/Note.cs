@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EverNoteCloneWpf.Model
 {
-    class Note
+    public class Note
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
