@@ -17,10 +17,38 @@ namespace EverNoteCloneWpf.ViewModel.Helpers
             using (SQLiteConnection conn = new SQLiteConnection(dbFile))
             {
                 conn.CreateTable<T>();
+                int rows = conn.Insert(item);
+                if (rows > 0)
+                    result = true;
+                
             }
-
-
             return result;
+        }
+
+        public static bool Delete<T>(T item)
+        {
+            var result = false;
+
+            using (SQLiteConnection conn = new SQLiteConnection(dbFile))
+            {
+                conn.CreateTable<T>();
+                int rows = conn.Delete(item);
+                if (rows > 0)
+                    return true;
+            }
+            return result;
+        }
+
+        public static List<T> Read<T>() where T : new() // where T : new() is needed to use the generic version of conn.Table<T>
+        {
+            List<T> items;
+
+            using (SQLiteConnection conn = new SQLiteConnection(dbFile))
+            {
+                conn.CreateTable<T>();
+                items = conn.Table<T>().ToList();
+            }
+            return items;
         }
     }
 }
