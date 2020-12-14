@@ -1,5 +1,7 @@
 ﻿using EverNoteCloneWpf.Model;
 using EverNoteCloneWpf.ViewModel.Commands;
+using EverNoteCloneWpf.ViewModel.Helpers;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -31,6 +33,36 @@ namespace EverNoteCloneWpf.ViewModel
         {
             NewNotebookCommand = new NewNotebookCommand(this);
             NewNoteCommand = new NewNoteCommand(this);
+        }
+
+
+        // create new note
+        public void CreateNote(int notebookid)
+        {
+            // set inital values for the new note
+            Note newNote = new Note()
+            {
+                Id = notebookid,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Title = "New Note"
+            };
+
+            // insert the new note into the db
+            DatabaseHelper.Insert(newNote);
+
+        }
+
+        // create new notebook
+        public void CreateNoteBook()
+        {
+            Notebook newNoteBook = new Notebook()
+            {
+                Name = "New Notebook"
+            };
+
+            // insert into db
+            DatabaseHelper.Insert(newNoteBook);
         }
 
         public ObservableCollection<Note> Note { get; set; }

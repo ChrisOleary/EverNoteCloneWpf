@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EverNoteCloneWpf.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -20,12 +21,19 @@ namespace EverNoteCloneWpf.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            Notebook selectedNotebook = parameter as Notebook;
+            if (selectedNotebook != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void Execute(object parameter)
         {
-           // TODO
+            Notebook selectedNotebook = parameter as Notebook;
+            // TODO create new note
+            VM.CreateNote(selectedNotebook.Id);
         }
     }
 }
