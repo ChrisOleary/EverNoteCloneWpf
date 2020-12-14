@@ -4,23 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EverNoteCloneWpf.View"
+        xmlns:vm="clr-namespace:EverNoteCloneWpf.ViewModel"
         mc:Ignorable="d"
-        Title="NotesWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Button Grid.ColumnSpan="2">Button 1</Button>
-        <Button Grid.Column="3">Button 2</Button>
-        <Button Grid.Row="1">Button 3</Button>
-        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">Button 4</Button>
-        <Button Grid.Column="0" Grid.Row="2">Button 5</Button>
-    </Grid>
+        Title="NotesWindow" Height="300" Width="600">
+    <Window.Resources>
+        <vm:NotesVM x:Key="vm"/>
+    </Window.Resources>
+
+    <DockPanel DataContext="{StaticResource vm}">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Notebook"
+                          Command="{Binding NewNotebookCommand}"/>
+                <MenuItem Header="New Note"
+                          Command="{Binding NewNoteCommand}"
+                          CommandParameter="{Binding SelectedNoteBook}"/>
+                <Separator/>
+                <MenuItem Header="Exit"
+                          Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+        <ListView DockPanel.Dock="Left"
+                  Width="140"
+                  ItemsSource="{Binding NoteBooks}">
+            
+        </ListView>
+        <ListView DockPanel.Dock="Left"
+                  Width="140"
+                  >
+            
+        </ListView>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="Speech"/>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid/>
+    </DockPanel>
 </Window>

@@ -25,7 +25,7 @@ namespace EverNoteCloneWpf.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            // TODO
+            VM.CreateNoteBook();
         }
     }
 }
