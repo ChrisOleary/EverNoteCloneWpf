@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EverNoteCloneWpf.View"
         xmlns:vm="clr-namespace:EverNoteCloneWpf.ViewModel"
         mc:Ignorable="d"
-        Title="NotesWindow" Height="300" Width="600">
+        Title="NotesWindow" Height="300" Width="700">
     <Window.Resources>
         <vm:NotesVM x:Key="vm"/>
     </Window.Resources>
@@ -20,19 +20,31 @@
                           Command="{Binding NewNoteCommand}"
                           CommandParameter="{Binding SelectedNoteBook}"/>
                 <Separator/>
+                <MenuItem Header="Delete"
+                          Command="{Binding DeleteNotebookCommand}"
+                          CommandParameter="{Binding SelectedNoteBook}"/>
                 <MenuItem Header="Exit"
                           Click="MenuItem_Click" />
             </MenuItem>
         </Menu>
         <ListView DockPanel.Dock="Left"
                   Width="140"
-                  ItemsSource="{Binding NoteBooks}">
-            
+                  ItemsSource="{Binding NoteBooks}"
+                  SelectedValue="{Binding SelectedNoteBook, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Id}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <ListView DockPanel.Dock="Left"
                   Width="140"
-                  >
-            
+                  ItemsSource="{Binding Notes}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>

@@ -1,17 +1,18 @@
-﻿using System;
+﻿using EverNoteCloneWpf.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
 namespace EverNoteCloneWpf.ViewModel.Commands
 {
-    public class NewNotebookCommand : ICommand
+    public class DeleteNotebookCommand : ICommand
     {
-        public NewNotebookCommand newNotebook { get; set; }
+        public DeleteNotebookCommand deleteNotebookCommand { get; set; }
 
         public NotesVM VM { get; set; }
 
-        public NewNotebookCommand(NotesVM vm)
+        public DeleteNotebookCommand(NotesVM vm)
         {
             VM = vm;
         }
@@ -22,16 +23,18 @@ namespace EverNoteCloneWpf.ViewModel.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+
         public bool CanExecute(object parameter)
         {
-            return true;
+            Notebook selectedNotebook = parameter as Notebook;
+            if (selectedNotebook != null)
+                return true;
+            return false;
         }
 
         public void Execute(object parameter)
         {
-            VM.CreateNoteBook();
-
-
+            VM.DeleteNoteBook(VM.SelectedNoteBook);
         }
     }
 }

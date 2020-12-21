@@ -18,10 +18,12 @@ namespace EverNoteCloneWpf.ViewModel.Helpers
             {
                 conn.CreateTable<T>();
                 int rows = conn.Insert(item);
+               
                 if (rows > 0)
                     result = true;
                 
             }
+            
             return result;
         }
 
@@ -31,6 +33,7 @@ namespace EverNoteCloneWpf.ViewModel.Helpers
 
             using (SQLiteConnection conn = new SQLiteConnection(dbFile))
             {
+            
                 conn.CreateTable<T>();
                 int rows = conn.Delete(item);
                 if (rows > 0)
