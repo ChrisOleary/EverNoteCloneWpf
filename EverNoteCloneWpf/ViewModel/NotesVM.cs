@@ -55,10 +55,10 @@ namespace EverNoteCloneWpf.ViewModel
             // set inital values for the new note
             Note newNote = new Note()
             {
-                Id = notebookid,
+                NotebookId = notebookid,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Title = $"New Note for {DateTime.Now.ToString()}"
+                Title = $"Note: {DateTime.Now.ToString()}"
             };
 
             // insert the new note into the db
@@ -72,10 +72,7 @@ namespace EverNoteCloneWpf.ViewModel
         // create new notebook
         public void CreateNoteBook()
         {
-            Notebook newNoteBook = new Notebook()
-            {
-                Name = "New Notebook"
-            };
+            Notebook newNoteBook = new Notebook();
 
             // insert into db
             DatabaseHelper.Insert(newNoteBook);

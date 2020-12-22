@@ -20,20 +20,27 @@
                           Command="{Binding NewNoteCommand}"
                           CommandParameter="{Binding SelectedNoteBook}"/>
                 <Separator/>
-                <MenuItem Header="Delete"
-                          Command="{Binding DeleteNotebookCommand}"
-                          CommandParameter="{Binding SelectedNoteBook}"/>
                 <MenuItem Header="Exit"
                           Click="MenuItem_Click" />
             </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Delete Notebook"
+                          Command="{Binding DeleteNotebookCommand}"
+                          CommandParameter="{Binding SelectedNoteBook}"/>
+            </MenuItem>
         </Menu>
-        <ListView DockPanel.Dock="Left"
-                  Width="140"
-                  ItemsSource="{Binding NoteBooks}"
-                  SelectedValue="{Binding SelectedNoteBook, Mode=TwoWay}">
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusTextBlock"/>
+            </StatusBarItem>
+        </StatusBar>
+        <ListView Width="140"
+                  DockPanel.Dock="Left" 
+                  SelectedValue="{Binding SelectedNoteBook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding NoteBooks}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Id}"/>
+                    <TextBlock Text="{Binding NoteFullName}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -49,8 +56,22 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Content="Speech"/>
+                <Button x:Name="boldButton"
+                        Click="boldButton_Click">
+                    <TextBlock Text="B"
+                               FontWeight="Bold"/>
+                </Button>
+                <Button x:Name="italicButton"
+                        Click="italicButton_Click">
+                    <TextBlock Text="i"
+                               FontStyle="Italic" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
-        <Grid/>
+        <Grid>
+            <RichTextBox x:Name="ContentRichTextBox"
+                         TextChanged="ContentRichTextBox_TextChanged"/>
+        </Grid>
+      
     </DockPanel>
 </Window>

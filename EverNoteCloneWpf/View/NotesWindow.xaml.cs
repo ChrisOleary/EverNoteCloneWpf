@@ -26,5 +26,24 @@ namespace EverNoteCloneWpf.View
         {
             Application.Current.Shutdown();
         }
+
+        private void ContentRichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int amountOfCharacters = (new TextRange(ContentRichTextBox.Document.ContentStart, ContentRichTextBox.Document.ContentEnd)).ToString().Length;
+
+            StatusTextBlock.Text = $"Document Length: {amountOfCharacters} Characters";
+        }
+
+        private void boldButton_Click(object sender, RoutedEventArgs e)
+        {
+            //set all the characters to bold
+            ContentRichTextBox.Selection.ApplyPropertyValue(Inline.FontWeightProperty, FontWeights.Bold);
+        }
+
+        private void italicButton_Click(object sender, RoutedEventArgs e)
+        {
+            //set all the characters to italic
+            ContentRichTextBox.Selection.ApplyPropertyValue(Inline.FontStyleProperty, FontStyles.Italic);
+        }
     }
 }
